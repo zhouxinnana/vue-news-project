@@ -5,7 +5,7 @@
 <template>
   <div id="app">
     <NavView></NavView>
-
+    asasd
     <BannerView></BannerView>
     <HomeView></HomeView>
     <FooterView></FooterView>
