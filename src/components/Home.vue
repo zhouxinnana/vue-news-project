@@ -1,0 +1,40 @@
+<template>
+    <div class="content">
+        <div class="newsList">
+            <ul>
+                <li>
+                    <h2>asdsadsad</h2>
+                    <p>asdsad</p>
+                </li>
+                <li>
+                    <h2>asdsadsad</h2>
+                    <p>asdsad</p>
+                </li>
+                <li>
+                    <h2>asdsadsad</h2>
+                    <p>asdsad</p>
+                </li>
+                <li>
+                    <h2>asdsadsad</h2>
+                    <p>asdsad</p>
+                </li>
+                <li>
+                    <h2>asdsadsad</h2>
+                    <p>asdsad</p>
+                </li>
+                <li>
+                    <h2>asdsadsad</h2>
+                    <p>asdsad</p>
+                </li>
+                <li>
+                    <h2>asdsadsad</h2>
+                    <p>asdsad</p>
+                </li>
+                <li>
+                    <h2>asdsadsad</h2>
+                    <p>asdsad</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</template>
