@@ -2,7 +2,11 @@
   <div id="app">
     <loading v-show="loading"></loading>
     <NavView v-show="headerShow"></NavView>
-    <router-view></router-view>
+    <transition name="slide-down">
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
+    </transition>
     <FooterView></FooterView>
   </div>
 </template>
@@ -11,17 +15,20 @@
   import NavView from './components/Nav.vue'
   import HomeView from './components/Home.vue'
   import FooterView from './components/Footer.vue'
-  import {mapGetters,matActions} from 'vuex'
+  import {
+    mapGetters,
+    matActions
+  } from 'vuex'
   export default {
-    computed:mapGetters([
+    computed: mapGetters([
       'headerShow',
       'loading'
     ]),
-    watch:{
-      $route(to,from){
-        if(to.path == '/user-info'){
+    watch: {
+      $route(to, from) {
+        if (to.path == '/user-info') {
           this.$store.dispatch('hideHeader');
-        }else{
+        } else {
           this.$store.dispatch('showHeader');
         }
       }
@@ -35,4 +42,13 @@
 
 <style>
   @import './assets/css/index.css';
+ .slide-down-enter-active, .slide-down-leave-active {
+	  transition: all .4s ease;
+	  opacity: .7;
+	  transform: translate3d(0, 6em, 0);
+	}
+	.slide-down-enter, .slide-down-leave-active {
+	  opacity: .1;
+	  transform: translate3d(0, 6em, 0);
+	}
 </style>
