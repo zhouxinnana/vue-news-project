@@ -1,13 +1,8 @@
-
-<style>
-  @import './assets/css/index.css';
-</style>
 <template>
   <div id="app">
-    <NavView></NavView>
-    asasd
-    <BannerView></BannerView>
-    <HomeView></HomeView>
+    <loading v-show="loading"></loading>
+    <NavView v-show="headerShow"></NavView>
+    <router-view></router-view>
     <FooterView></FooterView>
   </div>
 </template>
@@ -16,13 +11,28 @@
   import NavView from './components/Nav.vue'
   import HomeView from './components/Home.vue'
   import FooterView from './components/Footer.vue'
-  import BannerView from './components/Banner.vue'
+  import {mapGetters,matActions} from 'vuex'
   export default {
-    components:{
+    computed:mapGetters([
+      'headerShow',
+      'loading'
+    ]),
+    watch:{
+      $route(to,from){
+        if(to.path == '/user-info'){
+          this.$store.dispatch('hideHeader');
+        }else{
+          this.$store.dispatch('showHeader');
+        }
+      }
+    },
+    components: {
       NavView,
-      BannerView,
-      HomeView,
       FooterView
     }
   }
 </script>
+
+<style>
+  @import './assets/css/index.css';
+</style>
