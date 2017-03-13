@@ -43,13 +43,13 @@
         methods: {
             fnSlider() {
                 $(function () {
-                    var mySwipe = new Swipe($('.banner')[0], {
+                    var mySwipe = new Swipe(document.querySelector('.banner'), {
                         auto: 2000,
                         continuous: true,
                         stopPropation: true,
                         callback: function (index, element) {
-                            $('.banner ol li').removeClass('active');
-                            $('.banner ol li').eq(index).addClass('active');
+                            // $('.banner ol li').removeClass('active');
+                            // $('.banner ol li').eq(index).addClass('active');
                         }
                     });
                 });
