@@ -10,7 +10,7 @@ export default [{
     path: '/home',
     component: Home
 },{
-    path:'/article/:id',
+    path:'/article',
     component:Article,
 },{
     path: '/column',

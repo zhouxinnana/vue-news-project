@@ -1,20 +1,22 @@
 <template>
     <div class="content">
-
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <a class="swiper-slide" v-for="(item,index) in arrList" :data-id="item.channelId" @click="choose">{{item.name}}</a>
+                <a class="swiper-slide" v-for="(item,index) in titleList" :data-id="item.channelId" @click="choose">{{item.name}}</a>
             </div>
         </div>
         <div class="newsList ">
             <ul>
-                <li v-for="(item,index) in contentList">
-                    <h3>{{item.title}}</h3>
-                    <p>{{item.desc}}</p>
-                    <i>{{item.pubDate}}</i>
-                </li>
+                <router-link v-for="(item,index) in contentList" :to="{path:'/article',query:{detailhtml:item}}" tag="li">
+                    <!--<router-link >-->
+                        <h3>{{item.title}}</h3>
+                        <p>{{item.desc}}</p>
+                        <i>{{item.pubDate}}</i>
+                    <!--</router-link>-->
+                </router-link>
             </ul>
         </div>
+        <div class="more" @click="pageCount">加载更多</div>
     </div>
 </template>
 
@@ -22,18 +24,25 @@
     export default {
         data() {
             return {
-                arrList: [],
+                titleList: [],
+                contentList: [],
                 dataid: '',
                 dataname: '',
-                contentList: []
+                page:1,
+                nomore:true
             }
         },
         mounted() {
             this.renderList();
-
+            this.choose();
         },
         updated() {
             this.swiperFn();
+        },
+        watch:{
+            page (val) {
+                 this.choose();
+            }
         },
         methods: {
             swiperFn() {
@@ -48,22 +57,32 @@
                 this.$http.get(
                     'http://route.showapi.com/109-34?showapi_appid=32533&showapi_sign=487ea68dbcbb44dab6923884c9b9f426'
                 ).then(function (res) {
-                    that.arrList = res.data.showapi_res_body.channelList;
+                    that.titleList = res.data.showapi_res_body.channelList;
                 }).catch(function (err) {
                     console.error(err);
                 })
             },
             choose(ev) {
-                this.dataname = ev.target.innerHTML;
-                this.dataid = ev.target.getAttribute("data-id");
                 const that = this;
+                if(ev){
+                    that.dataname = ev.target.innerHTML || '';
+                    that.dataid = ev.target.getAttribute("data-id") || '';
+                    that.nomore = false;
+                    that.page = 1;
+                }
                 this.$http.get(
-                    `http://route.showapi.com/109-35?showapi_appid=32533&showapi_sign=487ea68dbcbb44dab6923884c9b9f426&channelId=${this.dataid}&channelName=${this.dataname}`
+                    `http://route.showapi.com/109-35?showapi_appid=32533&showapi_sign=487ea68dbcbb44dab6923884c9b9f426&channelId=${that.dataid}&channelName=${that.dataname}&page=${that.page}&needHtml=1`
                 ).then(function (res) {
-                    that.contentList = res.data.showapi_res_body.pagebean.contentlist;
+                    console.log(that.nomore );
+                    that.nomore ? that.contentList = that.contentList.concat(res.data.showapi_res_body.pagebean.contentlist) : that.contentList = res.data.showapi_res_body.pagebean.contentlist
+                    
                 }).catch(function (err) {
                     console.error(err);
                 })
+            },
+            pageCount(){
+                this.page++;
+                this.nomore = true;
             }
         }
     }
@@ -104,5 +123,10 @@
     }
     .newsList i {
         float: right;
+    }
+
+    .more{
+        padding:.2rem;
+        text-align:center;
     }
 </style>

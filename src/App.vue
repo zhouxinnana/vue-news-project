@@ -7,14 +7,14 @@
         <router-view></router-view>
       </keep-alive>
     </transition>
-    <FooterView></FooterView>
+    <!--<FooterView></FooterView>-->
   </div>
 </template>
 
 <script>
   import NavView from './components/Nav.vue'
   import HomeView from './components/Home.vue'
-  import FooterView from './components/Footer.vue'
+  // import FooterView from './components/Footer.vue'
   import {
     mapGetters,
     matActions
@@ -34,8 +34,8 @@
       }
     },
     components: {
-      NavView,
-      FooterView
+      NavView/*,
+      FooterView*/
     }
   }
 </script>
