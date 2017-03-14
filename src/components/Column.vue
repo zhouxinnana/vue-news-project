@@ -7,13 +7,13 @@
         </div>
         <div class="newsList ">
             <ul>
-                <router-link v-for="(item,index) in contentList" :to="{path:'/article',query:{detailhtml:item}}" tag="li">
-                    <!--<router-link >-->
+                <li v-for="(item,index) in contentList">
+                    <router-link :to="{path:'/article',query:{detailhtml:item}}">
                         <h3>{{item.title}}</h3>
                         <p>{{item.desc}}</p>
                         <i>{{item.pubDate}}</i>
-                    <!--</router-link>-->
-                </router-link>
+                    </router-link>
+                </li>
             </ul>
         </div>
         <div class="more" @click="pageCount">加载更多</div>
