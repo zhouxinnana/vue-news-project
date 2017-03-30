@@ -30,7 +30,7 @@ axios.interceptors.response.use(function (response) { //response
 
 
 Vue.prototype.$http = axios; // 把axios对象挂载到了Vue上
-console.log(Vue.prototype.$http);
+//console.log(Vue.prototype.$http);
 
 const router = new VueRouter({
   mode: 'history',

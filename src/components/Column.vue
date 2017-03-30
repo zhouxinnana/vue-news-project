@@ -7,20 +7,23 @@
         </div>
         <div class="newsList ">
             <ul>
-                <li v-for="(item,index) in contentList">
-                    <router-link :to="{path:'/article',query:{detailhtml:item}}">
+                <li v-for="(item,index) in contentList" @click="setDetail(item,$event)">
+                    <!--<router-link :to="{path:'/article',query:{detailhtml:item}}">-->
                         <h3>{{item.title}}</h3>
                         <p>{{item.desc}}</p>
                         <i>{{item.pubDate}}</i>
-                    </router-link>
+                    <!--</router-link>-->
+                    
                 </li>
             </ul>
         </div>
         <div class="more" @click="pageCount">加载更多</div>
+        <NewsDatial :item="item" ref="NewsDatialEle"></NewsDatial>
     </div>
 </template>
 
 <script>
+import NewsDatial from './NewsDatial.vue'
     export default {
         data() {
             return {
@@ -29,7 +32,9 @@
                 dataid: '',
                 dataname: '',
                 page:1,
-                nomore:true
+                nomore:true,
+                item:{},
+                showFlag:false
             }
         },
         mounted() {
@@ -73,7 +78,7 @@
                 this.$http.get(
                     `http://route.showapi.com/109-35?showapi_appid=32533&showapi_sign=487ea68dbcbb44dab6923884c9b9f426&channelId=${that.dataid}&channelName=${that.dataname}&page=${that.page}&needHtml=1`
                 ).then(function (res) {
-                    console.log(that.nomore );
+                  //  console.log(that.nomore );
                     that.nomore ? that.contentList = that.contentList.concat(res.data.showapi_res_body.pagebean.contentlist) : that.contentList = res.data.showapi_res_body.pagebean.contentlist
                     
                 }).catch(function (err) {
@@ -83,7 +88,15 @@
             pageCount(){
                 this.page++;
                 this.nomore = true;
+            },
+            //设置详情页面的值
+            setDetail(_item,event){
+                this.item = _item;
+                this.$refs.NewsDatialEle.show();
             }
+        },
+        components:{
+            NewsDatial
         }
     }
 </script>
@@ -128,5 +141,14 @@
     .more{
         padding:.2rem;
         text-align:center;
+    }
+    .box{
+       position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 48px;
+        z-index: 30;
+        width: 100%;
+        background: #fff;
     }
 </style>
