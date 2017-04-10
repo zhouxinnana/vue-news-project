@@ -3,12 +3,12 @@
         <BannerView></BannerView>
         <div class="newsList">
             <ul>
-                <li v-for="(item,index) in arrList">
+                <!--<li v-for="(item,index) in arrList">
                     <router-link :to="'/article/' + item.id">
                         <h2>{{index}}.{{item.channelId}}</h2>
                         <p>{{item.name}}</p>
                     </router-link>
-                </li>
+                </li>-->
             </ul>
         </div>
     </div>

@@ -5,32 +5,36 @@ import UserInfo from './components/UserInfo.vue'
 import UserLogin from './components/UserLogin.vue'
 import UserReg from './components/UserReg.vue'
 import Article from './components/Article.vue'
+// import City from './components/City.vue'
 
 export default [{
     path: '/home',
     component: Home
-},{
-    path:'/article',
-    component:Article,
-},{
+}, {
+    path: '/article',
+    component: Article,
+}, {
     path: '/column',
     component: Column
-},{
+}, {
     path: '/follow',
     component: Follow
-},{
-    path:'/user-info',
-    component:UserInfo
-},{
-    path:'/user-login',
-    component:UserLogin
-},{
-    path:'/user-reg',
-    component:UserReg
-},{
-    path:'/',
-    redirect:'/home'
-},{
-    path:'*',
-    redirect:'/home'
+}, {
+    path: '/user-info',
+    component: UserInfo
+}, {
+    path: '/user-login',
+    component: UserLogin
+}, {
+    path: '/user-reg',
+    component: UserReg
+}/*, {
+    path: '/city',
+    component: City
+}*/, {
+    path: '/',
+    redirect: '/home'
+}, {
+    path: '*',
+    redirect: '/home'
 }]
