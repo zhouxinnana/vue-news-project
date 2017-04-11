@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <loading v-show="loading"></loading>
-    <NavView v-show="headerShow"></NavView>
+    <NavView v-show="headerShow" v-on:cityStatus="getCityStatus"></NavView>
     <transition name="slide-down">
       <keep-alive>
         <router-view></router-view>
@@ -31,6 +31,11 @@
         } else {
           this.$store.dispatch('showHeader');
         }
+      }
+    },
+    methods:{
+      getCityStatus(msg){
+        console.log(msg.cityName)
       }
     },
     components: {

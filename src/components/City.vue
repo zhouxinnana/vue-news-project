@@ -34,7 +34,8 @@ export default {
             });
         },
         setCityTitle(ev){
-            this.data.title = ev.target.innerHTML;
+            this.data.cityName = ev.target.innerHTML;
+            this.data.cityId = ev.target.dataset.id;
             this.data.cityShow = false;
         }
     }

@@ -18,7 +18,7 @@
       </router-link>
       <a href="javascript:;"
          class="city"
-         @click="cityShowFn">{{cityTitle.title}}</a>
+         @click="cityShowFn">{{cityTitle.cityName}}</a>
       <City v-show="cityTitle.cityShow"
             :data="cityTitle"></City>
     </ul>
@@ -30,7 +30,8 @@ export default {
   data() {
     return {
       cityTitle: {
-        title: '河北',
+        cityName: '河北',
+        cityId: '',
         cityShow: false
       },
       bb: {
@@ -39,9 +40,12 @@ export default {
     }
   },
   watch: {
-    'bb.aa': {
+    'cityTitle': {
       handler: (val, oldVal) => {
-        console.log(123);
+        var cityStatus = {};
+        cityStatus.cityName = val.cityName;
+        cityStatus.cityId = val.cityId;
+        this.$emit('cityStatus', cityStatus);
       },
       deep: true
     }
@@ -49,7 +53,6 @@ export default {
   methods: {
     cityShowFn() {
       this.cityTitle.cityShow = true;
-      this.bb.aa = '123';
     }
   },
   components: {
