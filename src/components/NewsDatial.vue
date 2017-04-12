@@ -23,6 +23,7 @@
                         </div>
                         <div class="detailcontent">
                             <div v-html="item.html"></div>
+                            <!--<div style="line-height:50px;">{{item.html}}</div>-->
                         </div>
                     </div>
                 </div>
@@ -50,13 +51,13 @@ export default {
         show() {
             this.showFlag = true;
             this.$nextTick(function () {
-                if (!this.contentScroll) {
-                    this.contentScroll = new BScroll(this.$refs.detailContent, {
+                // if (!this.contentScroll) {
+                    /*this.contentScroll = */new BScroll(this.$refs.detailContent, {
                         click: true
                     });
-                } else {
-                    this.contentScroll.refresh();
-                }
+                // } else {
+                //     this.contentScroll.refresh();
+                // }
             })
         },
         hide() {
@@ -86,7 +87,7 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    bottom: 20px;
+    bottom: 0;
     overflow: hidden;
     background: #fff;
 }

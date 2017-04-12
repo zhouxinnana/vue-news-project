@@ -26,12 +26,6 @@
                 </div>
             </li>
         </ul>
-        <ol>
-            <li class="active"></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ol>
     </div>
 </template>
 
@@ -48,8 +42,7 @@
                         continuous: true,
                         stopPropation: true,
                         callback: function (index, element) {
-                            // $('.banner ol li').removeClass('active');
-                            // $('.banner ol li').eq(index).addClass('active');
+                         
                         }
                     });
                 });

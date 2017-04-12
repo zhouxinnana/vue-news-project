@@ -11,7 +11,13 @@
 export default {
     props:{
         'data':{
-            type: Object
+            type: Object,
+            default:function(){
+                return {
+                    cityName:'北京'
+                }
+            }
+            
         }
     },
     data(){
@@ -28,14 +34,12 @@ export default {
             var that = this;
             this.$http.get('http://route.showapi.com/170-48?showapi_appid=32533&showapi_sign=487ea68dbcbb44dab6923884c9b9f426').then(function (res) {
                 that.cityList = res.data.showapi_res_body.cityList;
-                console.log(that.cityList);
             }).catch(function(erro){
                 console.log(erro)
             });
         },
         setCityTitle(ev){
             this.data.cityName = ev.target.innerHTML;
-            this.data.cityId = ev.target.dataset.id;
             this.data.cityShow = false;
         }
     }
@@ -43,8 +47,12 @@ export default {
 </script>
 <style lang="" scoped>
 .city-list {
-    padding-top: 50px;
+    top: 38px;
     width: 100%;
+    position: relative;
+    z-index: 3;
+    height: 100%;
+    overflow: hidden;
 }
 
 .city-list ul {
@@ -52,6 +60,8 @@ export default {
    border-left: 1px solid rgba(204, 204, 204, 0.37);
    border-top: 1px solid rgba(204, 204, 204, 0.37);
    margin: 0 auto;
+   min-height: 100vh;
+   background: #f2f4f5;
 }
 
 .city-list li {
